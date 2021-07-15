@@ -1,0 +1,52 @@
+/* caixa do jogo */
+.game{
+    position: absolute;
+    width: min(70vw, 70vh);
+    height: min(70vw, 70vh);
+    margin-left: 50%;
+    transform: translate(-52%, 10%);
+    border-radius: 3vw;
+    background-color: #354b5a;
+    display: grid;
+    grid-template: repeat(3, 1fr)/ repeat(3, 1fr);
+    font-size: min(20vw, 20vh);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border: 0.8vw solid #354b5a;
+}
+
+/* blocos da caixa */
+.game > div{
+    width: 85%;
+    height: 85%;
+    margin: auto;
+    border-radius: 10%;
+    background-color: #4c687a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* caixa do botão */
+#botao{
+    position: absolute;
+    margin-left: 50vw;
+    margin-top: 50vh;
+    width: 20vw;
+    height: 20vw;
+}
+
+/* botão */
+#botao > button{
+    background-color: #4c687a;
+    border: none;
+    color: white;
+    padding: min(2vh, 2vw);
+    text-align: center;
+    text-decoration: none;
+    margin-top: min(37vh, 37vw);
+    transform: translate(-55%);
+    cursor: pointer;
+    border-radius: 4%;
+    font-size: min(4vw, 4vh); 
+}
