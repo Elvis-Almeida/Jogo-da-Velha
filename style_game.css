@@ -12,7 +12,7 @@ body{
     height: min(70vw, 70vh);
     margin-left: 50%;
     transform: translate(-52%, 10%);
-    border-radius: 3vw;
+    border-radius: 7%;
     background-color: #354b5a;
     display: grid;
     grid-template: repeat(3, 1fr)/ repeat(3, 1fr);
@@ -27,7 +27,7 @@ body{
     width: 85%;
     height: 85%;
     margin: auto;
-    border-radius: 10%;
+    border-radius: 12%;
     background-color: #4c687a;
     display: flex;
     justify-content: center;

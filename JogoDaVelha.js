@@ -5,7 +5,20 @@ const JogoDaVelha = {
 
     finDeJogo: 1,
 
-    conteiner_element: null, //para receber a div do html aqui  
+    conteiner_element: null, //para receber a div do html aqui 
+    
+    jogarContraPC: 1,
+
+    listaDeGanhadores: [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [2,4,6],
+        [0,4,8]
+    ],
 
     simbolo: {
         opcao: ['X', 'O'],
@@ -19,17 +32,6 @@ const JogoDaVelha = {
         }
     },
 
-    listaDeGanhadores: [
-        [0,1,2],
-        [3,4,5],
-        [6,7,8],
-        [0,3,6],
-        [1,4,7],
-        [2,5,8],
-        [2,4,6],
-        [0,4,8]
-    ],
-
     iniciar: function( container ) {
         this.conteiner_element = container;
     },
@@ -40,7 +42,6 @@ const JogoDaVelha = {
         this.finDeJogo = 1;
         this.simbolo.playerAtual = 0;
         botao.parentNode.removeChild(botao);
-        botao.parentNode.removeChild(botao);
         console.log("reiniciou");
     },
 
@@ -49,7 +50,7 @@ const JogoDaVelha = {
         botao.id = 'botao';
         botao.innerHTML = '<button onclick="JogoDaVelha.reiniciar(this)">Reiniciar</button>';
         document.body.appendChild(botao);
-
+        console.log("fim de jogo");
         this.finDeJogo = 0;
     },
 
@@ -64,9 +65,13 @@ const JogoDaVelha = {
                 if (this.verificarGanhador(this.simbolo.opcao[ this.simbolo.playerAtual ])) {
 
                     this.gameOver();
+                    return;
                 }
                 
                 this.simbolo.trocarPlayer();
+                if (this.jogarContraPC) {
+                    this.computador()   
+                }
             }
             else{
                 console.log("posição ocupada");
@@ -74,6 +79,27 @@ const JogoDaVelha = {
             this.verificarTabuleiroCheio();
         }      
     },
+
+    computador: function () {
+        let jogadas = [];
+
+        for (let i=0; i<10; i++) {
+            try {
+                if ((this.tabuleiro[i].indexOf("X") == -1) && (this.tabuleiro[i].indexOf("O") == -1)) {
+                jogadas.push(i);
+            }
+            } catch (error) {
+                //console.log(error);
+            }
+            
+        }
+
+        let jogada = jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]
+        if (this.simbolo.playerAtual == 1) {
+            this.fazerJogar(jogada);
+        }
+    },
+
 
     verificarGanhador: function(playeratual) {
         for(let i=0; i < 8; i++){
@@ -104,6 +130,7 @@ const JogoDaVelha = {
     verificarTabuleiroCheio: function() {
         if (!this.tabuleiro.includes('')) {
             this.gameOver();
+            return 0;
         }
         return 1; 
     },
@@ -115,4 +142,6 @@ const JogoDaVelha = {
         }
         this.conteiner_element.innerHTML = content;
     },
+
+    
 };
