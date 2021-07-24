@@ -1,15 +1,13 @@
-//criar jogo com programação orientada a objeto
-const JogoDaVelha = {
 
-    tabuleiro: ['','','','','','','','',''], 
+var tabuleiro = ['','','','','','','','','']
 
-    finDeJogo: 1,
+var finDeJogo = 1
 
-    conteiner_element: null, //para receber a div do html aqui 
+var conteiner_element = null //para receber a div do html aqui 
     
-    jogarContraPC: 1,
+var jogarContraPC = 0
 
-    listaDeGanhadores: [
+var listaDeGanhadores = [
         [0,1,2],
         [3,4,5],
         [6,7,8],
@@ -18,9 +16,9 @@ const JogoDaVelha = {
         [2,5,8],
         [2,4,6],
         [0,4,8]
-    ],
+    ]
 
-    simbolo: {
+var simbolo = {
         opcao: ['X', 'O'],
         playerAtual: 0,
         trocarPlayer: function(){
@@ -29,63 +27,63 @@ const JogoDaVelha = {
             } else {
                 this.playerAtual = 0;
             }
-        }
-    },
+        },
+    }
 
-    iniciar: function( container ) {
-        this.conteiner_element = container;
-    },
+function iniciar( container ) {
+        conteiner_element = container;
+    }
 
-    reiniciar: function(botao) {
-        this.tabuleiro = ['','','','','','','','',''];
-        this.mostrarJogo();
-        this.finDeJogo = 1;
-        this.simbolo.playerAtual = 0;
+function reiniciar(botao) {
+        tabuleiro = ['','','','','','','','',''];
+        mostrarJogo();
+        finDeJogo = 1;
+        simbolo.playerAtual = 0;
         botao.parentNode.removeChild(botao);
         console.log("reiniciou");
-    },
+    }
 
-    gameOver: function () {
+function gameOver() {
         var botao = document.createElement('div'); 
-        botao.id = 'botao';
-        botao.innerHTML = '<button onclick="JogoDaVelha.reiniciar(this)">Reiniciar</button>';
+        botao.id = 'caixa_botao_reiniciar';
+        botao.innerHTML = '<button onclick="reiniciar(this)">Reiniciar</button>';
         document.body.appendChild(botao);
         console.log("fim de jogo");
-        this.finDeJogo = 0;
-    },
+        finDeJogo = 0;
+    }
 
-    fazerJogar: function( posicao ){
-        if(this.finDeJogo){
+function fazerJogar( posicao ){
+        if(finDeJogo){
             console.log(posicao);
-            if ( this.tabuleiro[ posicao ] === '' ) {
-                this.tabuleiro[ posicao ] = this.simbolo.opcao[ this.simbolo.playerAtual ];
+            if ( tabuleiro[ posicao ] === '' ) {
+                tabuleiro[ posicao ] = simbolo.opcao[ simbolo.playerAtual ];
 
-                this.mostrarJogo();
+                mostrarJogo();
 
-                if (this.verificarGanhador(this.simbolo.opcao[ this.simbolo.playerAtual ])) {
+                if (verificarGanhador(simbolo.opcao[ simbolo.playerAtual ])) {
 
-                    this.gameOver();
+                    gameOver();
                     return;
                 }
                 
-                this.simbolo.trocarPlayer();
-                if (this.jogarContraPC) {
-                    this.computador()   
+                simbolo.trocarPlayer();
+                if (jogarContraPC) {
+                    computador()   
                 }
             }
             else{
                 console.log("posição ocupada");
             }
-            this.verificarTabuleiroCheio();
+            verificarTabuleiroCheio();
         }      
-    },
+    }
 
-    computador: function () {
+function computador() {
         let jogadas = [];
 
         for (let i=0; i<10; i++) {
             try {
-                if ((this.tabuleiro[i].indexOf("X") == -1) && (this.tabuleiro[i].indexOf("O") == -1)) {
+                if ((tabuleiro[i].indexOf("X") == -1) && (tabuleiro[i].indexOf("O") == -1)) {
                 jogadas.push(i);
             }
             } catch (error) {
@@ -95,24 +93,25 @@ const JogoDaVelha = {
         }
 
         let jogada = jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]
-        if (this.simbolo.playerAtual == 1) {
-            this.fazerJogar(jogada);
+        if (simbolo.playerAtual == 1) {
+            setTimeout(() => {
+               fazerJogar(jogada); 
+            }, 100);
         }
-    },
+    }
 
-
-    verificarGanhador: function(playeratual) {
+function verificarGanhador(playeratual) {
         for(let i=0; i < 8; i++){
 
             //se o tabuleiro tiver o mesmo simbolo na posição de listaDeGanhadores 0 1 e 2 o player atual ganha
-            if (this.tabuleiro[this.listaDeGanhadores[i][0]] === playeratual &&
-            this.tabuleiro[this.listaDeGanhadores[i][1]] === playeratual &&
-            this.tabuleiro[this.listaDeGanhadores[i][2]] === playeratual) {
+            if (tabuleiro[listaDeGanhadores[i][0]] === playeratual &&
+            tabuleiro[listaDeGanhadores[i][1]] === playeratual &&
+            tabuleiro[listaDeGanhadores[i][2]] === playeratual) {
 
                 //para pintar as letras ganhadoras de verde
-                var letraGanhadora1 = document.getElementById(this.listaDeGanhadores[i][0])
-                var letraGanhadora2 = document.getElementById(this.listaDeGanhadores[i][1])
-                var letraGanhadora3 = document.getElementById(this.listaDeGanhadores[i][2])
+                var letraGanhadora1 = document.getElementById(listaDeGanhadores[i][0])
+                var letraGanhadora2 = document.getElementById(listaDeGanhadores[i][1])
+                var letraGanhadora3 = document.getElementById(listaDeGanhadores[i][2])
                 
                 letraGanhadora1.style.color = '#3bdb50';
                 letraGanhadora2.style.color = '#3bdb50';
@@ -125,23 +124,26 @@ const JogoDaVelha = {
                 return 1;  
             }
         }
-    },
+    }
 
-    verificarTabuleiroCheio: function() {
-        if (!this.tabuleiro.includes('')) {
-            this.gameOver();
+function verificarTabuleiroCheio() {
+        if (!tabuleiro.includes('')) {
+            gameOver();
             return 0;
         }
         return 1; 
-    },
+    }
 
-    mostrarJogo: function (){
+function mostrarJogo(){
         let content = '';
         for ( i in this.tabuleiro ) {
-            content += '<div id='+i+' onclick="JogoDaVelha.fazerJogar(' + i + ')"> ' + this.tabuleiro[i] + '</div>';
+            content += '<div id='+i+' onclick="fazerJogar(' + i + ')"> ' + this.tabuleiro[i] + '</div>';
         }
         this.conteiner_element.innerHTML = content;
-    },
+    }
 
+function menu() {
+    document.body.style.filter = 'blur(10px)'
     
-};
+}
+

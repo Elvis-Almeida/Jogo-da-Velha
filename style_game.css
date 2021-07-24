@@ -6,7 +6,7 @@ body{
 }
 
 /* caixa do jogo */
-.game{
+.caixa_do_game{
     position: absolute;
     width: min(70vw, 70vh);
     height: min(70vw, 70vh);
@@ -23,7 +23,7 @@ body{
 }
 
 /* blocos da caixa */
-.game > div{
+.caixa_do_game > div{
     width: 85%;
     height: 85%;
     margin: auto;
@@ -35,7 +35,7 @@ body{
 }
 
 /* caixa do botão */
-#botao{
+#caixa_botao_reiniciar{
     position: absolute;
     margin-left: 50vw;
     margin-top: 50vh;
@@ -44,7 +44,7 @@ body{
 }
 
 /* botão */
-#botao > button{
+#caixa_botao_reiniciar > button{
     background-color: #4c687a;
     border: none;
     color: white;
