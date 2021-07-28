@@ -8,15 +8,16 @@
     <title>Jogo da Velha</title>
 </head>
     <body>
-        
-        <div class='caixa_do_game'></div>
+        <div class="caixa_opcoes"></div>
 
-        <div class='menu_do_game'></div>
+        <div class='caixa_menu'></div>
+
+        <div class="caixa_principal"></div>
             
         <script src="JogoDaVelha.js"></script> 
-
         <script>
-            iniciar(document.querySelector('.caixa_do_game'));
+            menu.iniciar(document.querySelector('.caixa_menu'), document.querySelector('.caixa_opcoes'));
+            iniciar(document.querySelector('.caixa_principal'));
             mostrarJogo();
         </script>
         
