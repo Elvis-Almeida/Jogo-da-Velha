@@ -8,8 +8,13 @@
 
 body{
     user-select: none;
-    background-color: #f1f9ff;
-    
+    background-color: #f1f9ff;  
+}
+
+.caixa_principal{
+    display: flex;
+    justify-content: center;
+
 }
 
 /* caixa do jogo */
@@ -17,8 +22,7 @@ body{
     position: absolute;
     width: min(70vw, 70vh);
     height: min(70vw, 70vh);
-    margin-left: 50%;
-    transform: translate(-52%, 10%);
+    top: 7%;
     border-radius: 7%;
     background-color: #354b5a;
     display: grid;
@@ -43,11 +47,7 @@ body{
 
 /* caixa do botão */
 #caixa_botao_reiniciar{
-    position: absolute;
-    margin-left: 50vw;
-    margin-top: 50vh;
-    width: 20vw;
-    height: 20vw;
+    margin-top: 50vh; 
 }
 
 /* botão */
@@ -59,57 +59,8 @@ body{
     text-align: center;
     text-decoration: none;
     margin-top: min(37vh, 37vw);
-    transform: translate(-55%);
     cursor: pointer;
     border-radius: 4%;
-    font-size: min(4vw, 4vh); 
+    font-size: min(4vw, 4vh);
 }
 
-/* Menu */
-.caixa_menu{
-    position: absolute;
-    width: 100vw;
-    height: 100vh; 
-}
-
-#caixa_das_barras{
-    width: min(8vh, 8vw);
-    height: min(8vh, 8vw);
-    position:absolute;
-    margin: 1%;
-    right:0%;
-    top:0%;
-    filter: blur(0px);
-}
-
-.barras{
-    position:absolute;
-    width: 100%;
-    height: 20%;
-    background-color: #354b5a;
-    border-radius: 10px 20px;
-    margin: auto;
-    opacity: 0.5;
-}
-
-#barra1{
-    top: 0%;
-}
-#barra2{
-    top: 50%;
-    bottom: 50%;
-}
-#barra3{
-    bottom: 0%;
-}
-
-.caixa_opcoes{
-    position: absolute;
-    z-index: 1;
-    width: 0px;
-    height: 0px;
-}
-.OpcoesDeConfiguracoes{
-    font-size: 10em;
-    
-}

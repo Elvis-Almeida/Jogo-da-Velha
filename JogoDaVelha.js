@@ -47,7 +47,7 @@ function reiniciar(botao) {
         mostrarJogo();
         finDeJogo = 1;
         simbolo.playerAtual = 0;
-        botao.parentNode.removeChild(botao);
+        document.getElementById('caixa_botao_reiniciar').remove()
         console.log("reiniciou");
     }
 }
@@ -150,84 +150,3 @@ function mostrarJogo(){
         }
         this.caixa_do_game.innerHTML = content;
     }
-
-var menu = {
-    caixa_menu: null,
-    caixa_opcoes:null,
-
-    iniciar: function(caixa_Menu, caixa_Opcoes) {
-        this.caixa_menu = caixa_Menu
-        this.caixa_opcoes = caixa_Opcoes
-        
-        let caixa = document.createElement('div')
-        let barra1 = document.createElement('div')
-        let barra2 = document.createElement('div')
-        let barra3 = document.createElement('div')
-        
-        barra1.id = 'barra1'
-        barra2.id = 'barra2'
-        barra3.id = 'barra3'
-        barra1.className = 'barras'
-        barra2.className = 'barras'
-        barra3.className = 'barras'
-        caixa.id='caixa_das_barras'
-
-        this.caixa_menu.appendChild(caixa)
-        caixa.appendChild(barra1)
-        caixa.appendChild(barra2)
-        caixa.appendChild(barra3)
-
-        this.criarOpcoes()
-
-        caixa.addEventListener('click', ()=>{this.abrir(caixa)})
-    },
-
-    criarOpcoes: function(num) {
-        var multPlayer = document.createElement('h2')
-        var simglePlayer = document.createElement('h2')
-        var definirTemaEscuro = document.createElement('h2')
-
-        multPlayer.id = 'multPlayer'
-        simglePlayer.id = 'simglePlayer'
-        definirTemaEscuro.id = 'definirTemaEscuro'
-
-        multPlayer.textContent = "Multiplayer"
-        simglePlayer.textContent = "Singleplayer"
-        definirTemaEscuro.textContent = "TemaEscuro"
-
-        multPlayer.className = 'OpcoesDeConfiguracoes'
-        simglePlayer.className = 'OpcoesDeConfiguracoes'
-        definirTemaEscuro.className = 'OpcoesDeConfiguracoes'
-
-        multPlayer.style.opacity = '0'
-        simglePlayer.style.opacity = '0'
-        definirTemaEscuro.style.opacity = '0'
-
-        this.caixa_opcoes.appendChild(multPlayer)
-        this.caixa_opcoes.appendChild(simglePlayer)
-        this.caixa_opcoes.appendChild(definirTemaEscuro)
-    },
-
-    abrir: function(caixa) {
-        pause = 0
-        
-        multPlayer.style.opacity = '1'
-        simglePlayer.style.opacity = '1'
-        definirTemaEscuro.style.opacity = '1'
-        
-        caixa_principal.style.filter = 'blur(10px)'
-        caixa.addEventListener('click', ()=>{this.fechar(caixa)}) 
-    },
-
-    fechar: function(caixa) {
-        pause = 1
-
-        multPlayer.style.opacity = '0'
-        simglePlayer.style.opacity = '0'
-        definirTemaEscuro.style.opacity = '0'
-
-        caixa_principal.style.filter = 'blur(0px)'
-        caixa.addEventListener('click', ()=>{this.abrir(caixa)})  
-    }
-}
-

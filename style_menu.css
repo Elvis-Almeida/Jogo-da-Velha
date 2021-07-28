@@ -1,0 +1,8 @@
+#caixa_menu{
+    z-index: 1000;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: aqua;
+    visibility: hidden;
+}
