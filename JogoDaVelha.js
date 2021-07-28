@@ -47,7 +47,10 @@ function reiniciar(botao) {
         mostrarJogo();
         finDeJogo = 1;
         simbolo.playerAtual = 0;
-        document.getElementById('caixa_botao_reiniciar').remove()
+        try {
+            document.getElementById('caixa_botao_reiniciar').remove()
+        } catch (e) {
+        }
         console.log("reiniciou");
     }
 }

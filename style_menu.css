@@ -1,8 +1,25 @@
-#caixa_menu{
-    z-index: 1000;
+#navegação_menu{
     position: absolute;
-    width: 100vw;
-    height: 100vh;
-    background-color: aqua;
-    visibility: hidden;
+    top: 1%;
+    right: 1%;
+}
+
+#caixa_icone_menu{
+    background-color: brown;
+    width: 5vw;
+    height: 5vw;
+}
+#barra1{
+
+}
+#barra2{
+
+}
+#barra3{
+
+}
+
+
+#lista_menu{
+    visibility: hidden;   
 }
