@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
 * {
     padding:0;
     margin:0;
@@ -12,9 +14,9 @@ body{
 }
 
 .caixa_principal{
-    display: flex;
+    display: flex;   
     justify-content: center;
-
+    filter: blur(0px);
 }
 
 /* caixa do jogo */
@@ -22,13 +24,14 @@ body{
     position: absolute;
     width: min(70vw, 70vh);
     height: min(70vw, 70vh);
-    top: 7%;
+    /* top: 7%; */
+    transform: translate(0%, 10vh);
     border-radius: 7%;
     background-color: #354b5a;
     display: grid;
     grid-template: repeat(3, 1fr)/ repeat(3, 1fr);
     font-size: min(20vw, 20vh);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Comfortaa', cursive;
     color: white;
     border: 0.8vw solid #354b5a;
 }
@@ -39,15 +42,17 @@ body{
     height: 85%;
     margin: auto;
     border-radius: 12%;
-    background-color: #4c687a;
+    /* background-color: #4c687a; */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-content: center;
 }
 
 /* caixa do botão */
 #caixa_botao_reiniciar{
-    margin-top: 50vh; 
+    /* margin-top: 50vh;  */
+    justify-content: center;
+    display: flex;
 }
 
 /* botão */
@@ -58,9 +63,12 @@ body{
     padding: min(2vh, 2vw);
     text-align: center;
     text-decoration: none;
-    margin-top: min(37vh, 37vw);
+    /* margin-top: min(37vh, 37vw); */
+    top: min(88vh, 120vw);
+    position: absolute;
     cursor: pointer;
-    border-radius: 4%;
     font-size: min(4vw, 4vh);
+    border-radius: 4%;
+    
 }
 

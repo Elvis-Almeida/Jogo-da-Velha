@@ -1,16 +1,13 @@
 
 var tabuleiro = ['','','','','','','','','']
-
 var finDeJogo = 1
-
-var caixa_do_game = null //para receber a div do html aqui 
-
+var caixa_do_game = null
 var caixa_principal = null
-    
+var audioClick
+var audioVitoria   
 var jogarContraPC = 1
-
 var pause = 1
-
+var tema = 0
 var listaDeGanhadores = [
         [0,1,2],
         [3,4,5],
@@ -39,6 +36,8 @@ function iniciar(container) {
         caixa_do_game = document.createElement('div');
         caixa_do_game.className = 'caixa_do_game'
         caixa_principal.appendChild(caixa_do_game)
+        audioClick = document.getElementById('audio_click')
+        audioVitoria = document.getElementById('som_vitoria')
     }
 
 function reiniciar(botao) {
@@ -60,6 +59,9 @@ function gameOver() {
         botao.id = 'caixa_botao_reiniciar';
         botao.innerHTML = '<button onclick="reiniciar(this)">Reiniciar</button>';
         caixa_principal.appendChild(botao);
+        if (tema) {
+            document.querySelector('#caixa_botao_reiniciar > button').style.backgroundColor = '#959595'
+        }
         console.log("fim de jogo");
         finDeJogo = 0;
     }
@@ -70,8 +72,9 @@ function fazerJogar( posicao ){
             if ( tabuleiro[ posicao ] === '' ) {
                 tabuleiro[ posicao ] = simbolo.opcao[ simbolo.playerAtual ];
 
+                audioClick.play();
                 mostrarJogo();
-
+                
                 if (verificarGanhador(simbolo.opcao[ simbolo.playerAtual ])) {
 
                     gameOver();
@@ -120,15 +123,19 @@ function verificarGanhador(playeratual) {
             tabuleiro[listaDeGanhadores[i][1]] === playeratual &&
             tabuleiro[listaDeGanhadores[i][2]] === playeratual) {
 
+                audioVitoria.play()
+
                 //para pintar as letras ganhadoras de verde
                 var letraGanhadora1 = document.getElementById(listaDeGanhadores[i][0])
                 var letraGanhadora2 = document.getElementById(listaDeGanhadores[i][1])
                 var letraGanhadora3 = document.getElementById(listaDeGanhadores[i][2])
                 
+                
                 letraGanhadora1.style.color = '#3bdb50';
                 letraGanhadora2.style.color = '#3bdb50';
                 letraGanhadora3.style.color = '#3bdb50';
-
+                
+                
                 letraGanhadora1.style.boxShadow = '3px 3px 4px #1b262e';
                 letraGanhadora2.style.boxShadow = '3px 3px 4px #1b262e';
                 letraGanhadora3.style.boxShadow = '3px 3px 4px #1b262e';
@@ -152,4 +159,15 @@ function mostrarJogo(){
             content += '<div id='+i+' onclick="fazerJogar(' + i + ')"> ' + this.tabuleiro[i] + '</div>';
         }
         this.caixa_do_game.innerHTML = content;
+
+        if (tema) {
+            for (let i = 0; i < 9; i++) {
+                document.getElementById(i).style.backgroundColor = '#959595'
+            }
+        }
+        else{
+            for (let i = 0; i < 9; i++) {
+                document.getElementById(i).style.backgroundColor = '#4c687a'
+            }
+        }
     }
