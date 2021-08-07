@@ -206,15 +206,11 @@ function jogarDificil(dificil) {
     return jogada
 }
 
-
 function computador() {
     let jogada = -1
     let primeiraJogada = 1
     
-    
-
-
-    
+    if (simbolo.playerAtual == 1) {
         if (dificuldade == 0) { // facil
             jogada = jogarfacil()
         }
