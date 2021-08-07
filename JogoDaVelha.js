@@ -8,6 +8,7 @@ var audioVitoria
 var jogarContraPC = 1
 var pause = 1
 var tema = 0
+var dificuldade = 0
 var listaDeGanhadores = [
         [0,1,2],
         [3,4,5],
@@ -93,27 +94,119 @@ function fazerJogar( posicao ){
         }      
     }
 
-function computador() {
-        let jogadas = [];
+function jogarfacil() {
+    let jogadas = []
 
-        for (let i=0; i<10; i++) {
-            try {
-                if ((tabuleiro[i].indexOf("X") == -1) && (tabuleiro[i].indexOf("O") == -1)) {
+    for (let i=0; i<10; i++) {
+        try {
+            if ((tabuleiro[i].indexOf("X") == -1) && (tabuleiro[i].indexOf("O") == -1)) {
                 jogadas.push(i);
             }
-            } catch (error) {
-                //console.log(error);
+        } catch (error) {
+            //console.log(error);
+        }
+        
+    }
+
+    return jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]      
+}
+
+function jogarDificil(dificil) {
+    let jogada = -1
+    let quantidadeDeAcerto=0
+    let player 
+    let posicaoVazia
+
+    for (let i=0; i < 2; i++) {
+
+        player = simbolo.opcao[i]
+        console.log(player);
+
+        for(let j=0; j < 8; j++){
+            quantidadeDeAcerto=0
+
+            // verifica se tem duas peças alinhadas para ganhar
+            if (tabuleiro[listaDeGanhadores[j][0]] === player ) {
+                quantidadeDeAcerto+=1
+            }
+            else{
+                posicaoVazia = listaDeGanhadores[j][0]
+            }
+
+            if (tabuleiro[listaDeGanhadores[j][1]] === player) {
+                quantidadeDeAcerto+=1
+            }
+            else{
+                posicaoVazia = listaDeGanhadores[j][1]
             }
             
-        }
+            if (tabuleiro[listaDeGanhadores[j][2]] === player) {
+                quantidadeDeAcerto+=1
+            }
+            else{
+                posicaoVazia = listaDeGanhadores[j][2]
+            }
 
-        let jogada = jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]
-        if (simbolo.playerAtual == 1) {
-            setTimeout(() => {
-               fazerJogar(jogada); 
-            }, 100);
-        }
+            //verifica se a posição é vazia
+            
+            if (quantidadeDeAcerto==2) {
+                if ((tabuleiro[posicaoVazia].indexOf("X") == -1) && (tabuleiro[posicaoVazia].indexOf("O") == -1)) {
+                    jogada = posicaoVazia
+                    console.log('jogou certo');
+                    break
+                }
+            }   
+        }   
     }
+    if (jogada == -1) {
+        if (dificil) {
+            if (tabuleiro[4]==''){
+                jogada = 4
+            }
+            else{
+                let test=0
+                let jogadas = [0,2,6,8]
+                jogada = jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]
+                while (tabuleiro[jogada] != '') {
+                    jogada = jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]
+                    if (test > 3) {
+                        jogada = jogarfacil()
+                        break
+                    }
+                    test += 1
+                }
+                console.log('jogou facil');
+            }
+        }
+        else{
+            jogada = jogarfacil()
+        }
+         
+    }
+    return jogada
+}
+
+
+function computador() {
+    let jogada = -1
+    let primeiraJogada = 1
+    
+    if (simbolo.playerAtual == 1) {
+        if (dificuldade == 0) { // facil
+            jogada = jogarfacil()
+        }
+        if (dificuldade == 1) { // medio
+            jogada = jogarDificil(0)
+        }
+        if(dificuldade == 2){ // dificil
+            jogada = jogarDificil(1)
+        }
+        primeiraJogada += 1
+        setTimeout(() => {
+            fazerJogar(jogada); 
+        }, 120);
+    }
+}
 
 function verificarGanhador(playeratual) {
         for(let i=0; i < 8; i++){
@@ -147,6 +240,7 @@ function verificarGanhador(playeratual) {
 
 function verificarTabuleiroCheio() {
         if (!tabuleiro.includes('')) {
+            
             gameOver();
             return 0;
         }

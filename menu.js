@@ -2,25 +2,26 @@ import * as jogoDaVelha from './JogoDaVelha.js'
 
 var botao_Menu
 var listaMenu
-var multiplayer
-var singleplayer
 var temaClaroEscuro
+var dificuldadeDoJogo
+var modo_de_jogo
 
 function iniciar_menu() {
 
     botao_Menu = document.getElementById('caixa_icone_menu')
-    multiplayer = document.getElementById('multplayer')
-    singleplayer = document.getElementById('singleplayer')
     temaClaroEscuro = document.getElementById('tema')
     listaMenu = document.getElementById('lista_menu')
+    dificuldadeDoJogo = document.getElementById("dificuldade")
+    modo_de_jogo = document.getElementById('modo_de_jogo')
 
-    temaClaroEscuro.addEventListener('click', ()=>{Mudar_tema()})
-    singleplayer.addEventListener('click', ()=>{Singleplayer()})
-    multiplayer.addEventListener('click', ()=>{Multplayer()})
-    botao_Menu.addEventListener('click', ()=>{abrir_menu()})
+    temaClaroEscuro.addEventListener('click', Mudar_tema)
+    botao_Menu.addEventListener('click', abrir_menu)
+    dificuldadeDoJogo.addEventListener('click', mudarDificuldade)
+    modo_de_jogo.addEventListener('click', modoDeJogo)
 }
 
 function abrir_menu() {
+    pause = 0
 
     let blur
     if (window.innerHeight > window.innerWidth) {
@@ -30,29 +31,43 @@ function abrir_menu() {
         blur = window.innerHeight
     }
 
+    console.log('abriu');
     caixa_principal.style.filter = ' blur('+ blur*0.04 +'px)'
     listaMenu.style.visibility = 'visible'
 
-    botao_Menu.addEventListener('click', ()=>{fechar_menu()})
+
+    let painelEscuro = document.createElement('div')
+    painelEscuro.id = 'painel_escuro'
+    document.body.appendChild(painelEscuro)
+
+
+    botao_Menu.removeEventListener('click', abrir_menu)
+    botao_Menu.addEventListener('click', fechar_menu)
 }
 
 function fechar_menu(){
-    caixa_principal.style.filter = ' blur(0px)'
+    pause = 1
+
+    console.log('fechou')
+    caixa_principal.style.filter = 'blur(0px)'
     listaMenu.style.visibility = 'hidden'
-    botao_Menu.addEventListener('click', ()=>{abrir_menu()})
+    document.getElementById('painel_escuro').remove()
+    botao_Menu.removeEventListener('click', fechar_menu)
+    botao_Menu.addEventListener('click', abrir_menu)
 
 }
 
-function Multplayer() {
-    console.log('MULTPLAYER');
-    jogarContraPC = 0
-    fechar_menu()
-}
-
-function Singleplayer() {
-    console.log('Singleplayer');
-    jogarContraPC = 1
-    fechar_menu()
+function modoDeJogo() {
+    console.log('modo de jogo', jogarContraPC);
+    if(jogarContraPC == 0){
+        jogarContraPC = 1
+        modo_de_jogo.textContent = 'Modo de jogo: Singleplayer'
+    }
+    else{
+        jogarContraPC = 0
+        modo_de_jogo.textContent = 'Modo de jogo: Multplayer'
+    }
+    reiniciar()
 }
 
 function Mudar_tema() {
@@ -72,7 +87,7 @@ function Mudar_tema() {
         document.getElementById('barra1').style.backgroundColor = '#ffffff'
         document.getElementById('barra2').style.backgroundColor = '#ffffff'
         document.getElementById('barra3').style.backgroundColor = '#ffffff'
-        document.getElementById('tema').textContent = 'Tema Claro'
+        document.getElementById('tema').textContent = 'Tema: Claro'
         
         for (let i = 0; i < 9; i++) {
             document.getElementById(i).style.backgroundColor = '#959595'
@@ -93,7 +108,7 @@ function Mudar_tema() {
         document.getElementById('barra1').style.backgroundColor = '#354b5a'
         document.getElementById('barra2').style.backgroundColor = '#354b5a'
         document.getElementById('barra3').style.backgroundColor = '#354b5a'
-        document.getElementById('tema').textContent = 'Tema Escuro'
+        document.getElementById('tema').textContent = 'Tema: Escuro'
         
         for (let i = 0; i < 9; i++) {
             document.getElementById(i).style.backgroundColor = '#4c687a'
@@ -103,6 +118,23 @@ function Mudar_tema() {
     }
     console.log('tema');
     fechar_menu()   
+}
+
+function mudarDificuldade(){
+    dificuldade+=1
+    if (dificuldade == 3) {
+        dificuldade = 0
+    }
+    console.log("mudou para", dificuldade);
+    if (dificuldade == 0) {
+        dificuldadeDoJogo.textContent = "Dificuldade: Facil"
+    }
+    if (dificuldade == 1) {
+        dificuldadeDoJogo.textContent = "Dificuldade: Médio"
+    }
+    if (dificuldade == 2) {
+        dificuldadeDoJogo.textContent = "Dificuldade: Difícil"
+    }
 }
 
 

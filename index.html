@@ -21,16 +21,16 @@
                 <div class="barras" id="barra3"></div>
             </div>
             <ul id="lista_menu">
-                <li class="opcoes_menu" id="singleplayer">1 jogador</li>
-                <li class="opcoes_menu" id="multplayer">2 jogadores</li>
-                <li class="opcoes_menu" id="tema">Tema Escuro</li>
+                <li class="opcoes_menu" id="modo_de_jogo">Modo de jogo: Singleplayer</li>
+                <li class="opcoes_menu" id="tema">Tema: Escuro</li>
+                <li class="opcoes_menu" id="dificuldade">Dificuldade: Facil</li>
             </ul>
         </nav>
 
-        <div class="caixa_principal"></div>
+        <div id="caixa_principal"></div>
        
         <script>
-            iniciar(document.querySelector('.caixa_principal'));
+            iniciar(document.querySelector('#caixa_principal'));
             mostrarJogo();
         </script>
     </body>

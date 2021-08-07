@@ -10,13 +10,13 @@
 
 body{
     user-select: none;
-    background-color: #f1f9ff;  
+    background-color: #f1f9ff;
+    font-family: 'Comfortaa', cursive;  
 }
 
-.caixa_principal{
+#caixa_principal{
     display: flex;   
     justify-content: center;
-    filter: blur(0px);
 }
 
 /* caixa do jogo */
@@ -31,7 +31,6 @@ body{
     display: grid;
     grid-template: repeat(3, 1fr)/ repeat(3, 1fr);
     font-size: min(20vw, 20vh);
-    font-family: 'Comfortaa', cursive;
     color: white;
     border: 0.8vw solid #354b5a;
 }
@@ -68,7 +67,6 @@ body{
     position: absolute;
     cursor: pointer;
     font-size: min(4vw, 4vh);
-    border-radius: 4%;
-    
+    border-radius: 4%; 
 }
 
