@@ -164,18 +164,38 @@ function jogarDificil(dificil) {
                 jogada = 4
             }
             else{
+                let jogadas
+                if (
+                    tabuleiro[0] == "X" ||
+                    tabuleiro[2] == "X" ||
+                    tabuleiro[6] == "X" ||
+                    tabuleiro[8] == "X"
+                ) {
+                    if (tabuleiro[4] != 'X'){
+                        jogadas = [1,3,5,7]
+                        console.log('jogou no meio');
+                    }
+                    else{
+                        jogadas = [0,2,6,8]
+                        console.log('jogou no canto');
+                    }
+                }
+                else{
+                    jogadas = [0,2,6,8]
+                    console.log('jogou no canto');
+                }
+
                 let test=0
-                let jogadas = [0,2,6,8]
                 jogada = jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]
                 while (tabuleiro[jogada] != '') {
                     jogada = jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]
                     if (test > 3) {
                         jogada = jogarfacil()
+                        console.log('jogou facil');
                         break
                     }
                     test += 1
                 }
-                console.log('jogou facil');
             }
         }
         else{
@@ -191,7 +211,10 @@ function computador() {
     let jogada = -1
     let primeiraJogada = 1
     
-    if (simbolo.playerAtual == 1) {
+    
+
+
+    
         if (dificuldade == 0) { // facil
             jogada = jogarfacil()
         }
