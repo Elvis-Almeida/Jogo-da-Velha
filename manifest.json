@@ -1,0 +1,34 @@
+{
+    "short_name": "Jogo Da Velha",
+    "name": "Jogo Da Velha",
+    "description": "Joguinho da velha",
+    "icons": [
+      {
+        "src": "/favicon.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose":"any maskable"
+      },
+      {
+        "src": "/favicon.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose":"any maskable"
+      }
+    ],
+    "start_url": ".",
+    "background_color": "#f1f9ff",
+    "display": "fullscreen",
+    "orientation": "portrait-primary",
+    "theme_color": "#354b5a",
+    "shortcuts": [
+      {
+        "name": "Jogo Da Velha",
+        "short_name": "Jogo Da Velha",
+        "description": "joguinho da velha",
+        "url": "?source=pwa",
+        "icons": [{ "src": "favicon.png", "sizes": "512x512" }]
+      }
+    ]
+
+}

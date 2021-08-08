@@ -137,5 +137,5 @@ function mudarDificuldade(){
     }
 }
 
-
 iniciar_menu();
+
