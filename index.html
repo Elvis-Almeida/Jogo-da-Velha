@@ -5,18 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style_game.css">
+    <link rel="stylesheet" href="style_menu.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+
+    <script src="JogoDaVelha.js"></script>
+    <!-- <script type="module" src="Menu.js"></script> -->
     <title>Jogo da Velha</title>
 </head>
     <body>
-        
-        <div class='game'></div>
-            
-        <script src="JogoDaVelha.js"></script> 
+        <audio id="audio_click" src="movendo_peça_xadrez.mp3"></audio>
+        <audio id="som_vitoria" src="som_vitoria.mp3"></audio>
 
+        <nav id="navegação_menu">
+            <div id="caixa_icone_menu">
+                <div class="barras" id="barra1"></div>
+                <div class="barras" id="barra2"></div>
+                <div class="barras" id="barra3"></div>
+            </div>
+            <ul id="lista_menu">
+                <li class="opcoes_menu" id="modo_de_jogo">Modo de jogo: Singleplayer</li>
+                <li class="opcoes_menu" id="tema">Tema: Escuro</li>
+                <li class="opcoes_menu" id="dificuldade">Dificuldade: Facil</li>
+            </ul>
+        </nav>
+
+        <div id="caixa_principal"></div>
+       
         <script>
-            JogoDaVelha.iniciar(document.querySelector('.game'));
-            JogoDaVelha.mostrarJogo();
+            iniciar(document.querySelector('#caixa_principal'));
+            mostrarJogo();
         </script>
-        
     </body>
 </html>
