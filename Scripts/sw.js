@@ -1,16 +1,16 @@
 const CACHE_NAME = 'v1'
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/Menu.js',
-    '/JogoDaVelha.js',
-    '/style_game.css',
-    '/style_menu.css',
-    '/movendo_peça_xadrez.mp3',
-    '/som_vitoria.mp3',
-    '/sw.js',
-    '/favicon.png',
-    '/manifest.json',
+    '../',
+    '../index.html',
+    '../Scripts/Menu.js',
+    '../Scripts/JogoDaVelha.js',
+    '../Styles/style_game.css',
+    '../Styles/style_menu.css',
+    '../Audio/movendo_peça_xadrez.mp3',
+    '../Audio/som_vitoria.mp3',
+    '../Scripts/sw.js',
+    '../Images/favicon.png',
+    '../manifest.json',
 ]
 
 self.addEventListener('install', function(event) {

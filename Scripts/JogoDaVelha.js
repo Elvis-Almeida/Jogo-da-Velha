@@ -1,5 +1,5 @@
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('../Scripts/sw.js')
     .then(function(registration) {
         console.log("registo com sucesso, no escopo: ", registration.scope);
     })
@@ -44,11 +44,12 @@ var simbolo = {
 function iniciar(container) {
         caixa_principal = container
         caixa_do_game = document.createElement('div');
-        caixa_do_game.className = 'caixa_do_game'
-        caixa_principal.appendChild(caixa_do_game)
-        audioClick = document.getElementById('audio_click')
-        audioVitoria = document.getElementById('som_vitoria')
+        caixa_do_game.className = 'caixa_do_game';
+        caixa_principal.appendChild(caixa_do_game);
+        audioClick = document.getElementById('audio_click');
+        audioVitoria = document.getElementById('som_vitoria');
         iniciar_menu();
+        
     }
 
 function reiniciar(botao) {
@@ -216,6 +217,106 @@ function jogarDificil(dificil) {
     return jogada
 }
 
+function jogarImpossivel() {
+    let jogada = -1
+    let quantidadeDeAcerto=0
+    let player 
+    let posicaoVazia
+
+    for (let i=0; i < 2; i++) {
+
+        player = simbolo.opcao[i]
+        console.log(player);
+
+        for(let j=0; j < 8; j++){
+            quantidadeDeAcerto=0
+
+            // verifica se tem duas peças alinhadas para ganhar
+            if (tabuleiro[listaDeGanhadores[j][0]] === player ) {
+                quantidadeDeAcerto+=1
+            }
+            else{
+                posicaoVazia = listaDeGanhadores[j][0]
+            }
+
+            if (tabuleiro[listaDeGanhadores[j][1]] === player) {
+                quantidadeDeAcerto+=1
+            }
+            else{
+                posicaoVazia = listaDeGanhadores[j][1]
+            }
+            
+            if (tabuleiro[listaDeGanhadores[j][2]] === player) {
+                quantidadeDeAcerto+=1
+            }
+            else{
+                posicaoVazia = listaDeGanhadores[j][2]
+            }
+
+            //verifica se a posição é vazia
+            
+            if (quantidadeDeAcerto==2) {
+                if ((tabuleiro[posicaoVazia].indexOf("X") == -1) && (tabuleiro[posicaoVazia].indexOf("O") == -1)) {
+                    jogada = posicaoVazia
+                    console.log('jogou certo');
+                    break
+                }
+            }   
+        }   
+    }
+    if (jogada == -1) {
+
+            if (tabuleiro[4]==''){
+                jogada = 4
+            }
+            else{
+                let jogadas
+                if (
+                    tabuleiro[0] == "X" ||
+                    tabuleiro[2] == "X" ||
+                    tabuleiro[6] == "X" ||
+                    tabuleiro[8] == "X"
+                ) {
+                    if (tabuleiro[4] == 'X'){
+                        jogadas = [0,2,6,8]
+                        console.log('jogou no canto');
+                    }
+                    if (
+                        tabuleiro[4] == 'O' && 
+                        !(tabuleiro[1] == "X" ||
+                        tabuleiro[3] == "X" ||
+                        tabuleiro[5] == "X" ||
+                        tabuleiro[7] == "X")
+                    ){
+                        jogadas = [1,3,5,7]
+                        console.log('jogou no meio');
+                    }
+                    else{
+                        jogadas = [0,2,6,8]
+                        console.log('jogou no canto');
+                    }
+                }
+                else{
+                    jogadas = [0,2,6,8]
+                    console.log('jogou no canto');
+                }
+
+                let test=0
+                jogada = jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]
+                while (tabuleiro[jogada] != '') {
+                    jogada = jogadas[Math.ceil(Math.random() * (jogadas.length - 1))]
+                    if (test > 3) {
+                        jogada = jogarfacil()
+                        console.log('jogou facil');
+                        break
+                    }
+                    test += 1
+                }
+            }      
+    }
+    return jogada
+}
+
 function computador() {
     let jogada = -1
     let primeiraJogada = 1
@@ -229,6 +330,9 @@ function computador() {
         }
         if(dificuldade == 2){ // dificil
             jogada = jogarDificil(1)
+        }
+        if (dificuldade == 3) {
+            jogada = jogarImpossivel()
         }
         primeiraJogada += 1
         setTimeout(() => {
@@ -295,7 +399,7 @@ function mostrarJogo(){
         }
     }
     
-// import * as jogoDaVelha from './JogoDaVelha.js'
+// import * as jogoDaVelha from '../JogoDaVelha.js'
 
 var botao_Menu
 var listaMenu
@@ -315,6 +419,8 @@ function iniciar_menu() {
     botao_Menu.addEventListener('click', abrir_menu)
     dificuldadeDoJogo.addEventListener('click', mudarDificuldade)
     modo_de_jogo.addEventListener('click', modoDeJogo)
+    
+
 }
 
 function abrir_menu() {
@@ -336,6 +442,8 @@ function abrir_menu() {
     let painelEscuro = document.createElement('div')
     painelEscuro.id = 'painel_escuro'
     document.body.appendChild(painelEscuro)
+    // painelEscuro.addEventListener('click', fechar_menu)
+
 
 
     botao_Menu.removeEventListener('click', abrir_menu)
@@ -345,7 +453,7 @@ function abrir_menu() {
 function fechar_menu(){
     pause = 1
 
-    console.log('fechou')
+    console.log('fechou 4')
     caixa_principal.style.filter = 'blur(0px)'
     listaMenu.style.visibility = 'hidden'
     document.getElementById('painel_escuro').remove()
@@ -413,13 +521,12 @@ function Mudar_tema() {
 
         tema = 0 
     }
-    console.log('tema');
-    fechar_menu()   
+    console.log('tema'); 
 }
 
 function mudarDificuldade(){
     dificuldade+=1
-    if (dificuldade == 3) {
+    if (dificuldade == 4) {
         dificuldade = 0
     }
     console.log("mudou para", dificuldade);
@@ -431,6 +538,9 @@ function mudarDificuldade(){
     }
     if (dificuldade == 2) {
         dificuldadeDoJogo.textContent = "Dificuldade: Difícil"
+    }
+    if (dificuldade == 3) {
+        dificuldadeDoJogo.textContent = "Dificuldade: Impossível"
     }
 }
     

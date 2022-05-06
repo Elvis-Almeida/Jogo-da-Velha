@@ -11,7 +11,8 @@
 body{
     user-select: none;
     background-color: #f1f9ff;
-    font-family: 'Comfortaa', cursive;  
+    font-family: 'Comfortaa', cursive; 
+    overflow: hidden; 
 }
 
 #caixa_principal{

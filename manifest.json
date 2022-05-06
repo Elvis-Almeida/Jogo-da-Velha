@@ -4,13 +4,13 @@
     "description": "Joguinho da velha",
     "icons": [
       {
-        "src": "/favicon.png",
+        "src": "./Images/favicon.png",
         "type": "image/png",
         "sizes": "512x512",
         "purpose":"any maskable"
       },
       {
-        "src": "/favicon.png",
+        "src": "./Images/favicon.png",
         "type": "image/png",
         "sizes": "512x512",
         "purpose":"any maskable"
@@ -27,7 +27,7 @@
         "short_name": "Jogo Da Velha",
         "description": "joguinho da velha",
         "url": "?source=pwa",
-        "icons": [{ "src": "favicon.png", "sizes": "512x512" }]
+        "icons": [{ "src": "./Images/favicon.png", "sizes": "512x512" }]
       }
     ]
 

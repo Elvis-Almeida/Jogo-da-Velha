@@ -18,6 +18,7 @@ function iniciar_menu() {
     botao_Menu.addEventListener('click', abrir_menu)
     dificuldadeDoJogo.addEventListener('click', mudarDificuldade)
     modo_de_jogo.addEventListener('click', modoDeJogo)
+    
 }
 
 function abrir_menu() {
@@ -138,4 +139,5 @@ function mudarDificuldade(){
 }
 
 iniciar_menu();
+
 
