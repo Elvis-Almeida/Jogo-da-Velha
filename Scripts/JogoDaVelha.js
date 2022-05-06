@@ -292,7 +292,33 @@ function jogarImpossivel() {
                         console.log('jogou no meio');
                     }
                     else{
-                        jogadas = [0,2,6,8]
+
+                        if (tabuleiro[0] == "X" && tabuleiro[5] == "X") {
+                            return 2;
+                        }
+                        if (tabuleiro[2] == "X" && tabuleiro[7] == "X") {
+                            return 8;
+                        }
+                        if (tabuleiro[8] == "X" && tabuleiro[3] == "X") {
+                            return 6;
+                        }
+                        if (tabuleiro[6] == "X" && tabuleiro[1] == "X") {
+                            return 0;
+                        }
+                        //==========
+                        if (tabuleiro[0] == "X" && tabuleiro[7] == "X") {
+                            return 6;
+                        }
+                        if (tabuleiro[2] == "X" && tabuleiro[3] == "X") {
+                            return 0;
+                        }
+                        if (tabuleiro[8] == "X" && tabuleiro[1] == "X") {
+                            return 2;
+                        }
+                        if (tabuleiro[6] == "X" && tabuleiro[5] == "X") {
+                            return 8;
+                        }
+                        
                         console.log('jogou no canto');
                     }
                 }
