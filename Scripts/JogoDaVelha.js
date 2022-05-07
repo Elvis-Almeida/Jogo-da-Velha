@@ -18,6 +18,7 @@ var jogarContraPC = 1
 var pause = 1
 var tema = 0
 var dificuldade = 0
+var quemComeca = 1;
 var listaDeGanhadores = [
         [0,1,2],
         [3,4,5],
@@ -48,6 +49,13 @@ function iniciar(container) {
         caixa_principal.appendChild(caixa_do_game);
         audioClick = document.getElementById('audio_click');
         audioVitoria = document.getElementById('som_vitoria');
+
+        jogadorInicial()
+
+        simbolo.playerAtual = quemComeca;
+        if (jogarContraPC) {
+            computador()   
+        }
         iniciar_menu();
         
     }
@@ -55,15 +63,26 @@ function iniciar(container) {
 function reiniciar(botao) {
     if (pause) {
         tabuleiro = ['','','','','','','','',''];
-        mostrarJogo();
         finDeJogo = 1;
-        simbolo.playerAtual = 0;
+        
+        mostrarJogo();
+        jogadorInicial()
+
+        simbolo.playerAtual = quemComeca;
         try {
             document.getElementById('caixa_botao_reiniciar').remove()
         } catch (e) {
         }
         console.log("reiniciou");
+        if (jogarContraPC) {
+            computador()   
+        }
     }
+}
+
+function jogadorInicial() {
+    quemComeca = Math.round(Math.random())
+    console.log(quemComeca);
 }
 
 function gameOver() {
